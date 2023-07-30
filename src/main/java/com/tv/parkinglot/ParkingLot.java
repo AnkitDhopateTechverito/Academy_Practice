@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public class ParkingLot {
-
     private Set<Object> parkedCars = new HashSet<>();
     private final int capacity;
     private final ParkingLotNotifier notifier;

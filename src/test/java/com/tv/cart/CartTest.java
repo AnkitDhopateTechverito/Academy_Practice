@@ -339,31 +339,10 @@ public class CartTest {
         Money paymentAmount = new Money(CurrencyType.INR, 10);
         doNothing().when(paymentMock).pay(paymentAmount);
 
-        paymentMock.pay(new Money(CurrencyType.INR, 10));
+        paymentMock.pay(paymentAmount);
 
         verify(paymentMock).pay(paymentAmount);
-
-//        PayPalStub payPal = new PayPalStub();
-//
-//        payPal.pay(new Money(CurrencyType.INR, 10));
-//
-//        Assertions.assertEquals(new Money(CurrencyType.INR, 10), payPal.chargedAmount());
     }
 }
 
 
-class PayPalStub implements Payment {
-
-    private Money money;
-
-    @Override
-    public void pay(Money money) {
-        this.money = money;
-    }
-
-    public Money chargedAmount() {
-        return money;
-    }
-
-
-}

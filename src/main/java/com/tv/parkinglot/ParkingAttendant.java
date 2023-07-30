@@ -5,38 +5,38 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ParkingAttendant implements Employee,ParkingLotObserver{
-    private Set<ParkingLot> parkingLots = new HashSet<>();
-    private List<ParkingLot> avialableParkingLot = new ArrayList<>();
+public class ParkingAttendant implements Employee, ParkingLotObserver {
+    private final Set<ParkingLot> parkingLots = new HashSet<>();
+    private final List<ParkingLot> availableParkingLot = new ArrayList<>();
 
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLots.add(parkingLot);
-        avialableParkingLot.add(parkingLot);
+        availableParkingLot.add(parkingLot);
         parkingLot.addObserver(this);
     }
 
 
-
+    @Override
     public boolean directCars(Object car) {
-        ParkingLot parkingLot = avialableParkingLot.stream()
-                .findFirst().orElseThrow();
+        ParkingLot parkingLot = availableParkingLot.stream()
+                .findFirst().orElseThrow(() -> new RuntimeException("Could not find parking lot"));
         return parkingLot.park(car);
     }
 
-    public boolean isAvailable(){
+    @Override
+    public boolean isAvailable() {
         return parkingLots.stream()
                 .filter(freeParkingLot -> !freeParkingLot.isFull())
                 .findAny().isPresent();
     }
 
-
     @Override
     public void onParkingFull(ParkingLot parkingLot) {
-        this.avialableParkingLot.remove(parkingLot);
+        this.availableParkingLot.remove(parkingLot);
     }
 
     @Override
     public void onParkingFree(ParkingLot parkingLot) {
-        this.avialableParkingLot.add(parkingLot);
+        this.availableParkingLot.add(parkingLot);
     }
 }

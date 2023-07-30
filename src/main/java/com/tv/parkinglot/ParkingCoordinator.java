@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ParkingCoordinator implements Employee{
+public class ParkingCoordinator implements Employee {
     private final List<Employee> employees;
-    private Set<ParkingAttendant> parkingAttendants =new HashSet<>();
+    private Set<ParkingAttendant> parkingAttendants = new HashSet<>();
 
-    public  ParkingCoordinator(List<Employee> employees) {
+    public ParkingCoordinator(List<Employee> employees) {
         this.employees = employees;
     }
 
@@ -27,7 +27,4 @@ public class ParkingCoordinator implements Employee{
     public boolean isAvailable() {
         return true;
     }
-
-
-
 }
