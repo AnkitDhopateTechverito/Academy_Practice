@@ -13,7 +13,7 @@ public class ParkingCoordinatorTest {
     public void shouldDirectCarToAttendant() {
         ParkingAttendant parkingAttendant = new ParkingAttendant();
         ParkingCoordinator parkingCoordinator = new ParkingCoordinator(Arrays.asList(parkingAttendant));
-        ParkingLot parkingLot_1 = new ParkingLot(1, null);
+        ParkingLot parkingLot_1 = new ParkingLot(1);
         parkingAttendant.addParkingLot(parkingLot_1);
 
         Object audi = new Object();
@@ -28,8 +28,8 @@ public class ParkingCoordinatorTest {
         ParkingAttendant parkingAttendant_1 = new ParkingAttendant();
         ParkingAttendant parkingAttendant_2 = new ParkingAttendant();
         ParkingCoordinator parkingCoordinator = new ParkingCoordinator(Arrays.asList(parkingAttendant_1, parkingAttendant_2));
-        ParkingLot parkingLot_1 = new ParkingLot(1, null);
-        ParkingLot parkingLot_2 = new ParkingLot(1, null);
+        ParkingLot parkingLot_1 = new ParkingLot(1);
+        ParkingLot parkingLot_2 = new ParkingLot(1);
         parkingAttendant_1.addParkingLot(parkingLot_1);
         parkingAttendant_2.addParkingLot(parkingLot_2);
 
@@ -51,9 +51,9 @@ public class ParkingCoordinatorTest {
         ParkingCoordinator parkingCoordinator = new ParkingCoordinator(Arrays.asList(parkingAttendant_1, parkingAttendant_2));
 
 
-        ParkingLot parkingLot_1 = new ParkingLot(1, null);
-        ParkingLot parkingLot_2 = new ParkingLot(1, null);
-        ParkingLot parkingLot_3 = new ParkingLot(2, null);
+        ParkingLot parkingLot_1 = new ParkingLot(1);
+        ParkingLot parkingLot_2 = new ParkingLot(1);
+        ParkingLot parkingLot_3 = new ParkingLot(2);
         parkingAttendant_1.addParkingLot(parkingLot_1);
         parkingAttendant_2.addParkingLot(parkingLot_2);
         parkingAttendant_2.addParkingLot(parkingLot_3);
@@ -80,8 +80,8 @@ public class ParkingCoordinatorTest {
         ParkingCoordinator parkingCoordinator1 = new ParkingCoordinator(Arrays.asList(parkingAttendant_1));
         ParkingCoordinator parkingCoordinator2 = new ParkingCoordinator(Arrays.asList(parkingAttendant_2, parkingCoordinator1));
 
-        ParkingLot parkingLot_2 = new ParkingLot(1, null);
-        ParkingLot parkingLot_1 = new ParkingLot(1, null);
+        ParkingLot parkingLot_2 = new ParkingLot(1);
+        ParkingLot parkingLot_1 = new ParkingLot(1);
 
         parkingAttendant_1.addParkingLot(parkingLot_1);
         parkingAttendant_2.addParkingLot(parkingLot_2);
@@ -105,8 +105,8 @@ public class ParkingCoordinatorTest {
         ParkingCoordinatorStub sukhendu = new ParkingCoordinatorStub(Arrays.asList(kedar));
         ParkingCoordinator ashwinManager = new ParkingCoordinator(Arrays.asList(rohit, sukhendu));
 
-        ParkingLot parkingLot_2 = new ParkingLot(1, null);
-        ParkingLot parkingLot_1 = new ParkingLot(1, null);
+        ParkingLot parkingLot_2 = new ParkingLot(1);
+        ParkingLot parkingLot_1 = new ParkingLot(1);
 
         kedar.addParkingLot(parkingLot_1);
         rohit.addParkingLot(parkingLot_2);
@@ -122,8 +122,6 @@ public class ParkingCoordinatorTest {
     }
 
     private class ParkingAttendantStub extends ParkingAttendant {
-
-
         @Override
         public boolean directCars(Object car) {
             return true;
@@ -131,8 +129,6 @@ public class ParkingCoordinatorTest {
     }
 
     private class ParkingCoordinatorStub extends ParkingCoordinator {
-
-
         private Object car;
 
         public ParkingCoordinatorStub(List<Employee> employees) {

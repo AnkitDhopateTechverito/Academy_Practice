@@ -9,13 +9,7 @@ import java.util.Set;
 public class ParkingLot {
     private Set<Object> parkedCars = new HashSet<>();
     private final int capacity;
-    private ParkingLotNotifier notifier = null;
     private List<ParkingLotObserver> observers = new ArrayList<>();
-
-    public ParkingLot(int capacity, ParkingLotNotifier notifier) {
-        this.capacity = capacity;
-        this.notifier = notifier;
-    }
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
@@ -35,9 +29,6 @@ public class ParkingLot {
     }
 
     private void notifyWhenFull() {
-        if (isFull() && notifier!=null) {
-            notifier.notifyOnFull();
-        }
         if(isFull()){
             observers.forEach(observer -> observer.onParkingFull(this));
         }
@@ -50,9 +41,7 @@ public class ParkingLot {
     public boolean unPark(Object object) {
         boolean isFull = isFull();
         boolean isRemoved = parkedCars.remove(object);
-        if(isFull && isRemoved && notifier!=null){
-            notifier.notifyWhenFree();
-        }
+
         if(isFull && isRemoved) {
             observers.forEach(observer -> observer.onParkingFree(this));
         }

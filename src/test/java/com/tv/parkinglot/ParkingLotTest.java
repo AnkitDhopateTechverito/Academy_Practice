@@ -8,7 +8,7 @@ import static org.mockito.Mockito.*;
 public class ParkingLotTest {
     @Test
     public void carShouldBeParkedInTheParkingLot() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
 
         parkingLot.park(audi);
@@ -18,7 +18,7 @@ public class ParkingLotTest {
 
     @Test
     public void twoCarsShouldBeParkedInTheParkingLot() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
         Object bmw = new Object();
 
@@ -30,7 +30,7 @@ public class ParkingLotTest {
 
     @Test
     public void shouldNotParkSameCarTwiceInTheParkingLot() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
 
         parkingLot.park(audi);
@@ -41,7 +41,7 @@ public class ParkingLotTest {
 
     @Test
     public void carShouldNotCheckInWhenParkingLotHasTwoCars() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
         Object bmw = new Object();
         Object benz = new Object();
@@ -55,7 +55,7 @@ public class ParkingLotTest {
 
     @Test
     public void carShouldBeUnparkedFromTheParkingLot() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
 
         parkingLot.park(audi);
@@ -66,7 +66,7 @@ public class ParkingLotTest {
 
     @Test
     public void audiAndBmwAreParkedAndAudiIsRemovedFromTheParkingLot() {
-        ParkingLot parkingLot = new ParkingLot(2, null);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
         Object bmw = new Object();
 
@@ -148,27 +148,4 @@ public class ParkingLotTest {
     }
 
 
-    class NotificationStub implements ParkingLotNotifier {
-
-        private boolean notifiedOnFull;
-        private boolean notifiedOnFree;
-
-        @Override
-        public void notifyOnFull() {
-            this.notifiedOnFull = true;
-        }
-
-        @Override
-        public void notifyWhenFree() {
-            this.notifiedOnFree = true;
-        }
-
-        public boolean wasNotifiedOnFull() {
-            return this.notifiedOnFull;
-        }
-
-        public boolean wasNotifiedOnFreeAgain() {
-            return notifiedOnFree;
-        }
-    }
 }
