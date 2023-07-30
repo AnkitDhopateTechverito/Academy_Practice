@@ -3,6 +3,8 @@ package com.tv.parkinglot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.*;
+
 public class ParkingLotTest {
     @Test
     public void carShouldBeParkedInTheParkingLot() {
@@ -76,40 +78,73 @@ public class ParkingLotTest {
 
     @Test
     public void shouldSendNotificationToOwner_ParkingFull() {
-        NotificationStub notificationStub = new NotificationStub();
-        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        NotificationStub notificationStub = new NotificationStub();
+//        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        Object audi = new Object();
+//        Object bmw = new Object();
+//        parkingLot.park(audi);
+//        parkingLot.park(bmw);
+//
+//        Assertions.assertTrue(notificationStub.wasNotifiedOnFull());
+
+        ParkingLotObserver mockObserver = mock(ParkingLotObserver.class);
+        ParkingLot parkingLot = new ParkingLot(2);
+        parkingLot.addObserver(mockObserver);
+
         Object audi = new Object();
         Object bmw = new Object();
         parkingLot.park(audi);
         parkingLot.park(bmw);
 
-        Assertions.assertTrue(notificationStub.wasNotifiedOnFull());
+        verify(mockObserver).onParkingFull(parkingLot);
     }
 
     @Test
     public void shouldNotSendNotificationToOwner_whenLotIsNotFull() {
-        NotificationStub notificationStub = new NotificationStub();
-        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        NotificationStub notificationStub = new NotificationStub();
+//        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        Object bmw = new Object();
+//        parkingLot.park(bmw);
+//
+//        Assertions.assertFalse(notificationStub.wasNotifiedOnFull());
+
+        ParkingLotObserver mockObserver = mock(ParkingLotObserver.class);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object bmw = new Object();
+
+        parkingLot.addObserver(mockObserver);
         parkingLot.park(bmw);
 
-        Assertions.assertFalse(notificationStub.wasNotifiedOnFull());
+        verify(mockObserver, never()).onParkingFull(parkingLot);
     }
 
     @Test
     public void shouldSendNotificationToOwnerWhenLotHasCapacity() {
-        NotificationStub notificationStub = new NotificationStub();
-        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        NotificationStub notificationStub = new NotificationStub();
+//        ParkingLot parkingLot = new ParkingLot(2, notificationStub);
+//        Object audi = new Object();
+//        Object bmw = new Object();
+//        parkingLot.park(audi);
+//        parkingLot.park(bmw);
+//
+//        Assertions.assertTrue(notificationStub.wasNotifiedOnFull());
+//
+//        parkingLot.unPark(audi);
+//
+//        Assertions.assertTrue(notificationStub.wasNotifiedOnFreeAgain());
+
+        ParkingLotObserver mockObserver = mock(ParkingLotObserver.class);
+        ParkingLot parkingLot = new ParkingLot(2);
         Object audi = new Object();
         Object bmw = new Object();
+
+        parkingLot.addObserver(mockObserver);
         parkingLot.park(audi);
         parkingLot.park(bmw);
 
-        Assertions.assertTrue(notificationStub.wasNotifiedOnFull());
-
         parkingLot.unPark(audi);
 
-        Assertions.assertTrue(notificationStub.wasNotifiedOnFreeAgain());
+        verify(mockObserver).onParkingFree(parkingLot);
     }
 
 
@@ -129,7 +164,6 @@ public class ParkingLotTest {
         }
 
         public boolean wasNotifiedOnFull() {
-
             return this.notifiedOnFull;
         }
 

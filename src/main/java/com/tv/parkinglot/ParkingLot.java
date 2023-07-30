@@ -9,12 +9,16 @@ import java.util.Set;
 public class ParkingLot {
     private Set<Object> parkedCars = new HashSet<>();
     private final int capacity;
-    private final ParkingLotNotifier notifier;
+    private ParkingLotNotifier notifier = null;
     private List<ParkingLotObserver> observers = new ArrayList<>();
 
     public ParkingLot(int capacity, ParkingLotNotifier notifier) {
         this.capacity = capacity;
         this.notifier = notifier;
+    }
+
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
     }
 
     public boolean isFull() {
